@@ -1,13 +1,12 @@
-package com.hyperwallet.example;
+package com.hyperwallet.example.papercheck;
 
 import com.hyperwallet.clientsdk.Hyperwallet;
-import com.hyperwallet.clientsdk.model.HyperwalletBankCard;
 import com.hyperwallet.clientsdk.model.HyperwalletList;
-import com.hyperwallet.clientsdk.model.HyperwalletPaginationOptions;
+import com.hyperwallet.clientsdk.model.HyperwalletStatusTransition;
 import org.apache.commons.lang3.builder.MultilineRecursiveToStringStyle;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-public class ListBankCards {
+public class ListPaperCheckStatusTransitions {
 
     public static void main(String[] args) throws Exception {
         String username = System.getProperty("HYPERWALLET_USERNAME");
@@ -17,12 +16,11 @@ public class ListBankCards {
                                              password,
                                              "prg-44a64920-45fc-4578-a7f9-e14813b3ed54");
 
-        HyperwalletPaginationOptions options = new HyperwalletPaginationOptions().limit(5);
-        HyperwalletList<HyperwalletBankCard>
-            bankCards =
-            client.listBankCards("usr-0fb6d624-f18d-480d-b1e7-f48f534bbd75", options);
+        HyperwalletList<HyperwalletStatusTransition>
+            statusTransitions =
+            client.listPaperCheckStatusTransitions("usr-b4a1f0bd-cbf7-4467-aa6f-4445dea7e67d",
+                                                 "trm-b379ca8e-973a-47d4-a79c-eaaf2af89ee6");
 
-        System.out.println(ToStringBuilder.reflectionToString(bankCards, new MultilineRecursiveToStringStyle()));
+        System.out.println(ToStringBuilder.reflectionToString(statusTransitions, new MultilineRecursiveToStringStyle()));
     }
-
 }

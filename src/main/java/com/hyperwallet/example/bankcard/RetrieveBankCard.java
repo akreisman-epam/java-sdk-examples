@@ -1,11 +1,11 @@
-package com.hyperwallet.example;
+package com.hyperwallet.example.bankcard;
 
 import com.hyperwallet.clientsdk.Hyperwallet;
-import com.hyperwallet.clientsdk.model.HyperwalletStatusTransition;
+import com.hyperwallet.clientsdk.model.HyperwalletBankCard;
 import org.apache.commons.lang3.builder.MultilineRecursiveToStringStyle;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-public class DeactivateBankCard {
+public class RetrieveBankCard {
 
     public static void main(String[] args) throws Exception {
         String username = System.getProperty("HYPERWALLET_USERNAME");
@@ -15,11 +15,11 @@ public class DeactivateBankCard {
                                              password,
                                              "prg-44a64920-45fc-4578-a7f9-e14813b3ed54");
 
-        HyperwalletStatusTransition
-            statusTransition =
-            client.deactivateBankCard("usr-0fb6d624-f18d-480d-b1e7-f48f534bbd75",
-                                      "trm-3bdcb6c3-022b-4263-bec9-3efce4c4cb35");
+        HyperwalletBankCard
+            bankCard =
+            client.getBankCard("usr-0fb6d624-f18d-480d-b1e7-f48f534bbd75",
+                               "trm-3bdcb6c3-022b-4263-bec9-3efce4c4cb35");
 
-        System.out.println(ToStringBuilder.reflectionToString(statusTransition, new MultilineRecursiveToStringStyle()));
+        System.out.println(ToStringBuilder.reflectionToString(bankCard, new MultilineRecursiveToStringStyle()));
     }
 }

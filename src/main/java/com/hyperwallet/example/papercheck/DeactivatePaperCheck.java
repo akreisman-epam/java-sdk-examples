@@ -1,11 +1,11 @@
-package com.hyperwallet.example;
+package com.hyperwallet.example.papercheck;
 
 import com.hyperwallet.clientsdk.Hyperwallet;
 import com.hyperwallet.clientsdk.model.HyperwalletStatusTransition;
 import org.apache.commons.lang3.builder.MultilineRecursiveToStringStyle;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-public class RetrieveBankCardStatusTransition {
+public class DeactivatePaperCheck {
 
     public static void main(String[] args) throws Exception {
         String username = System.getProperty("HYPERWALLET_USERNAME");
@@ -17,9 +17,8 @@ public class RetrieveBankCardStatusTransition {
 
         HyperwalletStatusTransition
             statusTransition =
-            client.getBankCardStatusTransition("usr-0fb6d624-f18d-480d-b1e7-f48f534bbd75",
-                                               "trm-3bdcb6c3-022b-4263-bec9-3efce4c4cb35",
-                                               "sts-9b45f86c-090d-4190-b508-bf615318c28e");
+            client.deactivatePaperCheck("usr-b4a1f0bd-cbf7-4467-aa6f-4445dea7e67d",
+                                      "trm-b379ca8e-973a-47d4-a79c-eaaf2af89ee6");
 
         System.out.println(ToStringBuilder.reflectionToString(statusTransition, new MultilineRecursiveToStringStyle()));
     }

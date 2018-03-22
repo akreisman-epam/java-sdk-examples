@@ -1,4 +1,4 @@
-package com.hyperwallet.example;
+package com.hyperwallet.example.bankcard;
 
 import com.hyperwallet.clientsdk.Hyperwallet;
 import com.hyperwallet.clientsdk.model.HyperwalletBankCard;
