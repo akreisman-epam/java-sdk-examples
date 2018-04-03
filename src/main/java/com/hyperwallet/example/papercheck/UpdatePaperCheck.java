@@ -1,30 +1,31 @@
 package com.hyperwallet.example.papercheck;
 
 import com.hyperwallet.clientsdk.Hyperwallet;
-import com.hyperwallet.clientsdk.model.HyperwalletBankCard;
 import com.hyperwallet.clientsdk.model.HyperwalletPaperCheck;
-import org.apache.commons.lang3.builder.MultilineRecursiveToStringStyle;
-import org.apache.commons.lang3.builder.ToStringBuilder;
+import com.hyperwallet.example.Util;
 
 public class UpdatePaperCheck {
 
     public static void main(String[] args) throws Exception {
-        String username = System.getProperty("HYPERWALLET_USERNAME");
-        String password = System.getProperty("HYPERWALLET_PASSWORD");
+        int i = 0;
+        String username = args[i++];
+        String password = args[i++];
+        String programToken = (args.length > i) ? args[i++] : "prg-44a64920-45fc-4578-a7f9-e14813b3ed54";
+        String userToken = (args.length > i) ? args[i++] : "usr-b4a1f0bd-cbf7-4467-aa6f-4445dea7e67d";
+        String bankCardToken = (args.length > i) ? args[i++] : "trm-b379ca8e-973a-47d4-a79c-eaaf2af89ee6";
+        String addressLine1 = (args.length > i) ? args[i++] : "11111111";
 
         Hyperwallet client = new Hyperwallet(username,
                                              password,
-                                             "prg-44a64920-45fc-4578-a7f9-e14813b3ed54");
+                                             programToken);
 
         HyperwalletPaperCheck paperCheck = new HyperwalletPaperCheck()
-            .token("trm-b379ca8e-973a-47d4-a79c-eaaf2af89ee6")
-            .userToken("usr-b4a1f0bd-cbf7-4467-aa6f-4445dea7e67d")
-            .addressLine1("11111111");
+            .token(bankCardToken)
+            .userToken(userToken)
+            .addressLine1(addressLine1);
 
-        HyperwalletPaperCheck
-            updatedPaperCheck =
-            client.updatePaperCheck(paperCheck);
+        HyperwalletPaperCheck updatedPaperCheck = client.updatePaperCheck(paperCheck);
 
-        System.out.println(ToStringBuilder.reflectionToString(updatedPaperCheck, new MultilineRecursiveToStringStyle()));
+        Util.print(updatedPaperCheck);
     }
 }
