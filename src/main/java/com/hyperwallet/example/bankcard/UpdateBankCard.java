@@ -2,6 +2,8 @@ package com.hyperwallet.example.bankcard;
 
 import com.hyperwallet.clientsdk.Hyperwallet;
 import com.hyperwallet.clientsdk.model.HyperwalletBankCard;
+import com.hyperwallet.clientsdk.util.HyperwalletEncryption;
+import com.hyperwallet.example.HyperwalletEncriptionConfig;
 import com.hyperwallet.example.Util;
 
 public class UpdateBankCard {
@@ -14,10 +16,19 @@ public class UpdateBankCard {
         String userToken = (args.length > i) ? args[i++] : "usr-0fb6d624-f18d-480d-b1e7-f48f534bbd75";
         String bankCardToken = (args.length > i) ? args[i++] : "trm-3bdcb6c3-022b-4263-bec9-3efce4c4cb35";
         String dateOfExpiry = (args.length > i) ? "UTC" + args[i++] : "UTC2030-12";
+        String encryptionEnabled = (args.length > i) ? args[i++] : "false";
 
+        HyperwalletEncryption hyperwalletEncryption = null;
+        if (Boolean.parseBoolean(encryptionEnabled)) {
+            hyperwalletEncryption = new HyperwalletEncryption.HyperwalletEncryptionBuilder()
+                    .clientPrivateKeySetLocation(HyperwalletEncriptionConfig.CLIENT_PRIVATE_KEYSET_PATH)
+                    .hyperwalletKeySetLocation(HyperwalletEncriptionConfig.HYPERWALLET_KEYSET_PATH)
+                    .build();
+        }
         Hyperwallet client = new Hyperwallet(username,
                                              password,
-                                             programToken);
+                                             programToken,
+                                             hyperwalletEncryption);
 
         HyperwalletBankCard bankCard = new HyperwalletBankCard()
             .token(bankCardToken)
